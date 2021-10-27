@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 3px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 20px;
+}
+
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 40%; /* IE10 */
+  flex: 40%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Sidebar/right column */
+.rightside {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+
+.myForm {
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.8em;
+width: 30em;
+padding: 1em;
+}
+
+.myForm * {
+box-sizing: border-box;
+}
+
+.myForm label {
+padding: 0;
+font-weight: bold;
+text-align: right;
+display: block;
+}
+
+.myForm input,
+.myForm select,
+.myForm textarea {
+margin-left: 2em;
+float: right;
+width: 20em;
+border: 1px solid #ccc;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.9em;
+padding: 0.3em;
+}
+
+.myForm textarea {
+height: 100px;
+}
+
+.myForm button {
+padding: 1em;
+border-radius: 0.5em;
+background: #eee;
+border: none;
+font-weight: bold;
+margin-left: 14em;
+margin-top: 1.8em;
+}
+
+.myForm button:hover {
+background: #ccc;
+cursor: pointer;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Insurance Predictor</h1>
+  <p>This website helps in predicting your <b>insurance charges</b> based on your info</p>
+</div>
+
+
+<div class="row">
+  <div class="side">
+    <h2>How To Use</h2>
+    <!-- <h5>Photo of me:</h5>
+    <div class="fakeimg" style="height:200px;">Image</div> -->
+    <p>By filling some of your details like age, body mass index [BMI], gender , children and few other details, We will be predicting your insurance charges 
+    </p>
+    <h2>How Does It Work</h2>
+    <!-- <h5>Photo of me:</h5>
+    <div class="fakeimg" style="height:200px;">Image</div> -->
+    <p>We took the insurance dataset from kaggle and did data preprocessing and identified the correlation between the varaibles by using some visualization tools like seaborn and matplotlib
+    Based on the data, we have built two models those are Random Forest Regressor and Linear Regression
+    What ever data you have provided, it will the predicted from that model
+    </p>
+    
+  </div>
+  <div class="main">
+
+
+      <form class = "myForm" method="post" action="{{ url_for('predict')}}">
+
+      <p>
+      <label>Age 
+      <input type="number" name="age" required>
+      </label> 
+      </p>
+
+      <p>
+      <label>BMI 
+      <input type="number" name="bmi" required>
+      </label>
+      </p>
+
+          
+      <p>
+      <label>Children 
+      <select id="Children" name="Children" required>
+      <option value="" selected="selected">Select One</option>
+      <option value="0" >0</option>
+      <option value="1" >1</option>
+      <option value="2" >2</option>
+      <option value="3" >3</option>
+      </select>
+      </label> 
+      </p>
+
+      <p>
+      <label>Sex 
+      <select id="Sex" name="Sex" required>
+      <option value="" selected="selected">Select One</option>
+      <option value="1" >male</option>
+      <option value="0" >female</option>
+      </select>
+      </label> 
+      </p>
+
+      <p>
+      <label>Smoker 
+      <select id="Smoker" name="Smoker" required>
+      <option value="" selected="selected">Select One</option>
+      <option value="0" >No</option>
+      <option value="1" >Yes</option>
+      </select>
+      </label> 
+      </p>
+
+      <p>
+      <label>Region 
+      <select id="Region" name="Region" required>
+      <option value="" selected="selected">Select One</option>
+      <option value="0" >northwest</option>
+      <option value="1" >southeast</option>
+      <option value="2" >southwest</option>
+      <option value="3" >northeast</option>
+      </select>
+      </label> 
+      </p>
+
+      <p><button>Submit Enquiry</button></p>
+
+      </form>
+      <form  class = "myForm" >
+          <h3 style="color:red">{{ prediction_texts }}<h3>
+      </form>
+
+  </div>
+
+  <div class="rightside">
+    <h2>Insurance Prediction</h2>
+      <img src="{{url_for('static', filename='insurance.jpg')}}" alt="Insurance Prediction" width="350" height="255"/>
+  </div>
+
+</div>
+
+<div class="footer">
+  <h2>insurace Predictor</h2>
+</div>
+
+</body>
+</html>
