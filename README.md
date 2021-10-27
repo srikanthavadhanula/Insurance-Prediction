@@ -11,7 +11,7 @@ Deployed at: _https://google.com_
 
 • A glimpse of the web app:
 
- ![WEB-APP](ReadMe_Resources/weapp.PNG)
+ ![WEB-APP](ReadMe_Resources/webapp.PNG)
  
 
  ![WEB-APP](ReadMe_Resources/predict.PNG)
